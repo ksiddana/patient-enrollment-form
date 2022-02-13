@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { SignUp } from "./components/sign-up";
 import PatientEnrollmentForm from "./components/patient-enrollment-form";
 
 function App() {
