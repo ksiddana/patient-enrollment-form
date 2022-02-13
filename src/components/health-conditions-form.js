@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Container } from "semantic-ui-react";
 import { Dropdown } from "semantic-ui-react";
 import _ from "lodash";
 
@@ -132,18 +132,21 @@ const HealthConditionsForm = ({ nextStep, prevStep, handleChange }) => {
   // const groupConditionsByType = healthConditions.reduce((condition) => {}, )
   // console.log("formattedHealthConditions", formattedHealthConditions);
   return (
-    <Form>
-      {conditionsGroupedByType.map((type) => {
-        return <Dropdown fluid search selection options={type.conditions} />;
-      })}
-      HealthConditionsForm
-      <button onClick={prevStep} type="submit">
-        Previous
-      </button>
-      <button onClick={nextStep} type="submit">
-        Next
-      </button>
-    </Form>
+    <Container>
+      <Form>
+        {conditionsGroupedByType.map((type) => {
+          return <Dropdown fluid search selection options={type.conditions} />;
+        })}
+        <Form.Group>
+          <Form.Button onClick={prevStep} type="submit">
+            Previous
+          </Form.Button>
+          <Form.Button onClick={nextStep} type="submit">
+            Next
+          </Form.Button>
+        </Form.Group>
+      </Form>
+    </Container>
   );
 };
 

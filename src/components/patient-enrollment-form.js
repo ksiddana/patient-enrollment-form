@@ -4,18 +4,25 @@ import MedicalQuestionnaire from "./medical-questionnaire-form";
 import { ConfirmAndSubmitForm } from "./confirm-and-submit-form";
 import HealthConditionsForm from "./health-conditions-form";
 import { PatientSummary } from "./patient-summary";
-import Success1 from "./success-1";
+import Success from "./success";
 import { initialFormDataState, initialMedicalFormDataState } from "../store";
 
 export const PatientEnrollmentForm = () => {
+  const [patientAgreementCheckbox, setPatientAgreementCheckbox] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(initialFormDataState);
   const [medicalFormData, setMedicalFormData] = useState(initialMedicalFormDataState);
-  const [patientAgreementCheckbox, setPatientAgreementCheckbox] = useState(false);
+  const [disableNextStep, setDisableNextStep] = useState(true);
 
   const prevStep = (e) => {
     if (e) {
       e.preventDefault();
+    }
+    if (step === 5 && patientAgreementCheckbox === true) {
+      // disable Next Step button
+      setPatientAgreementCheckbox(false);
+      setStep(step - 1);
+    } else {
       setStep(step - 1);
     }
   };
@@ -26,6 +33,9 @@ export const PatientEnrollmentForm = () => {
     }
     if (step === 6) {
       setStep(1);
+    } else if (step === 5 && patientAgreementCheckbox === false) {
+      // disable Next Step button
+      setDisableNextStep(true);
     } else {
       setStep(step + 1);
     }
@@ -54,15 +64,20 @@ export const PatientEnrollmentForm = () => {
     setMedicalFormData(newMedicalFormData);
   };
 
-  const handleConfirmAndSubmitChange = (e) => {
-    console.log(e);
+  const handleConfirmAndSubmitChange = (e, data) => {
+    setPatientAgreementCheckbox(data.checked);
+    if (!data.checked) {
+      setDisableNextStep(true);
+    } else {
+      setDisableNextStep(false);
+    }
   };
 
   const handleResetForm = (e) => {
-    if (e) {
-      e.preventDefault();
-      console.log(e);
-    }
+    setFormData(initialFormDataState);
+    setMedicalFormData(initialMedicalFormDataState);
+    setPatientAgreementCheckbox(false);
+    setDisableNextStep(true);
   };
   // console.log("formData", formData);
 
@@ -82,11 +97,13 @@ export const PatientEnrollmentForm = () => {
         />
       );
     case 4:
-      return <PatientSummary prevStep={prevStep} nextStep={nextStep} />;
+      return <PatientSummary prevStep={prevStep} nextStep={nextStep} formData={formData} medicalFormData={medicalFormData} />;
     case 5:
-      return <ConfirmAndSubmitForm prevStep={prevStep} nextStep={nextStep} handleChange={handleConfirmAndSubmitChange} />;
+      return (
+        <ConfirmAndSubmitForm prevStep={prevStep} nextStep={nextStep} handleChange={handleConfirmAndSubmitChange} disableNextStep={disableNextStep} />
+      );
     case 6:
-      return <Success1 nextStep={nextStep} handleChange={() => {}} />;
+      return <Success nextStep={nextStep} handleResetForm={handleResetForm} />;
   }
 };
 
