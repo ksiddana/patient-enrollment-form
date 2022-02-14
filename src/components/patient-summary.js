@@ -1,7 +1,7 @@
 import React from "react";
-import { Form, Grid, Button, Container, Header } from "semantic-ui-react";
+import { Grid, Button, Container, Header } from "semantic-ui-react";
 
-export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData, healthConditionForm }) => {
+const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData, healthConditionForm }) => {
   return (
     <Container textAlign="left">
       <Grid>
@@ -79,3 +79,5 @@ export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData, 
     </Container>
   );
 };
+
+export default PatientSummary;

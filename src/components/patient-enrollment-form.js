@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import GeneralInformationForm from "./general-information-form";
 import MedicalQuestionnaire from "./medical-questionnaire-form";
-import { ConfirmAndSubmitForm } from "./confirm-and-submit-form";
+import ConfirmAndSubmitForm from "./confirm-and-submit-form";
 import HealthConditionsForm from "./health-conditions-form";
-import { PatientSummary } from "./patient-summary";
+import PatientSummary from "./patient-summary";
 import Success from "./success";
 import { initialFormDataState, initialMedicalFormDataState } from "../store";
 

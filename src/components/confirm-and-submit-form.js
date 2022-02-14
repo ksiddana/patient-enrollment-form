@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Checkbox, Container, Header } from "semantic-ui-react";
 
-export const ConfirmAndSubmitForm = ({ prevStep, nextStep, handleChange, disableNextStep }) => {
+const ConfirmAndSubmitForm = ({ prevStep, nextStep, handleChange, disableNextStep }) => {
   return (
     <Container textAlign="left">
       <Header block textAlign="center">
@@ -30,3 +30,5 @@ export const ConfirmAndSubmitForm = ({ prevStep, nextStep, handleChange, disable
     </Container>
   );
 };
+
+export default ConfirmAndSubmitForm;
