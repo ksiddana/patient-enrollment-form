@@ -59,45 +59,52 @@ export const healthConditions = [
 
 export const conditionsGroupedByType = [
   {
-    type: "Cardiovascular",
+    type: "cardiovascular",
     conditions: [
       {
         type: "cardiovascular",
         condition: "High blood pressure",
-        text: "High blood pressure",
-        value: "High blood pressure",
         key: "High blood pressure",
+        value: "High blood pressure",
+        text: "High blood pressure",
       },
-      { type: "cardiovascular", condition: "Cardiac Arrest", text: "Cardiac Arrest", value: "Cardiac Arrest", key: "Cardiac Arrest" },
-      { type: "cardiovascular", condition: "Arrhythmia", text: "Arrhythmia", value: "Arrhythmia", key: "Arrhythmia" },
+      { type: "cardiovascular", condition: "Cardiac Arrest", key: "Cardiac Arrest", value: "Cardiac Arrest", text: "Cardiac Arrest" },
+      { type: "cardiovascular", condition: "Arrhythmia", key: "Arrhythmia", value: "Arrhythmia", text: "Arrhythmia" },
       {
         type: "cardiovascular",
         condition: "Coronary heart disease",
-        text: "Coronary heart disease",
-        value: "Coronary heart disease",
         key: "Coronary heart disease",
+        value: "Coronary heart disease",
+        text: "Coronary heart disease",
+      },
+      {
+        type: "cardiovascular",
+        condition: "Coronary heart disease",
+        key: "Coronary heart disease",
+        value: "Coronary heart disease",
+        text: "Coronary heart disease",
       },
     ],
   },
   {
-    type: "Gastrointestinal",
+    type: "gastrointestinal",
     conditions: [
-      { type: "gastrointestinal", condition: "IBS", text: "IBS", value: "IBS", key: "IBS" },
-      { type: "gastrointestinal", condition: "Crohn's Disease", text: "Crohn's Disease", value: "Crohn's Disease", key: "Crohn's Disease" },
-      { type: "gastrointestinal", condition: "Gallstones", text: "Gallstones", value: "Gallstones", key: "Gallstones" },
+      { type: "gastrointestinal", condition: "IBS", key: "IBS", value: "IBS", text: "IBS" },
+      { type: "gastrointestinal", condition: "Crohn's Disease", key: "Crohn's Disease", value: "Crohn's Disease", text: "Crohn's Disease" },
+      { type: "gastrointestinal", condition: "Gallstones", key: "Gallstones", value: "Gallstones", text: "Gallstones" },
     ],
   },
   {
-    type: "Psychological",
+    type: "psychological",
     conditions: [
-      { type: "psychological", condition: "Depression", text: "Depression", key: "Depression", value: "Depression" },
-      { type: "psychological", condition: "Anxiety", text: "Anxiety", key: "Anxiety", value: "Anxiety" },
-      { type: "psychological", condition: "Stress", text: "Stress", key: "Stress", value: "Stress" },
-      { type: "psychological", condition: "Insomnia", text: "Insomnia", key: "Insomnia", value: "Insomnia" },
+      { type: "psychological", condition: "Depression", key: "Depression", value: "Depression", text: "Depression" },
+      { type: "psychological", condition: "Anxiety", key: "Anxiety", value: "Anxiety", text: "Anxiety" },
+      { type: "psychological", condition: "Stress", key: "Stress", value: "Stress", text: "Stress" },
+      { type: "psychological", condition: "Insomnia", key: "Insomnia", value: "Insomnia", text: "Insomnia" },
     ],
   },
   {
-    type: "Other",
+    type: "other",
     conditions: [
       { type: "other", condition: "Cancer", key: "Cancer", value: "Cancer", text: "Cancer" },
       { type: "other", condition: "Diabetes", key: "Diabetes", value: "Diabetes", text: "Diabetes" },

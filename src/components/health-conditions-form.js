@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Container, Header, Grid, Button, Label, Divider } from "semantic-ui-react";
 import { Dropdown } from "semantic-ui-react";
 import _ from "lodash";
-import { conditionsGroupedByType } from "../fixtures/health-conditions";
+import { conditionsGroupedByType } from "../helpers/transform";
 
 const HealthConditionsForm = ({ nextStep, prevStep, handleChange, handleSearchChange, healthConditionForm }) => {
   return (
