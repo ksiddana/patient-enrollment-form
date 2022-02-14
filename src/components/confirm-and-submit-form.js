@@ -4,7 +4,9 @@ import { Form, Checkbox, Container, Header } from "semantic-ui-react";
 export const ConfirmAndSubmitForm = ({ prevStep, nextStep, handleChange, disableNextStep }) => {
   return (
     <Container textAlign="left">
-      <Header>Disclosure</Header>
+      <Header block textAlign="center">
+        Disclosure
+      </Header>
       <Form>
         <p>
           Nullam quis risus eget urna mollis ornare vel eu leo. Aenean lacinia bibendum nulla sed consectetur. Integer posuere erat a ante venenatis
@@ -20,7 +22,7 @@ export const ConfirmAndSubmitForm = ({ prevStep, nextStep, handleChange, disable
           <Form.Button onClick={prevStep} type="submit">
             Previous
           </Form.Button>
-          <Form.Button onClick={nextStep} type="submit" disabled={disableNextStep}>
+          <Form.Button onClick={nextStep} type="submit" disabled={disableNextStep} positive>
             Next
           </Form.Button>
         </Form.Group>

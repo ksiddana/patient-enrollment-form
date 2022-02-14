@@ -13,6 +13,7 @@ export const PatientEnrollmentForm = () => {
   const [formData, setFormData] = useState(initialFormDataState);
   const [medicalFormData, setMedicalFormData] = useState(initialMedicalFormDataState);
   const [disableNextStep, setDisableNextStep] = useState(true);
+  const [healthConditionForm, setHealthConditionForm] = useState({});
 
   const prevStep = (e) => {
     if (e) {
@@ -79,13 +80,30 @@ export const PatientEnrollmentForm = () => {
     setPatientAgreementCheckbox(false);
     setDisableNextStep(true);
   };
-  // console.log("formData", formData);
+
+  const handleHealthConditionFormChange = (e, data) => {
+    const { value, options } = data;
+    const type = options[0].type;
+    const newHealthConditionForm = { ...healthConditionForm, [type]: value };
+    setHealthConditionForm(newHealthConditionForm);
+  };
+  const handleSearchChange = (e, { searchQuery }) => {
+    // setSearchQuery(searchQuery);
+  };
 
   switch (step) {
     case 1:
       return <GeneralInformationForm nextStep={nextStep} handleChange={handleChange} formData={formData} />;
     case 2:
-      return <HealthConditionsForm nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} />;
+      return (
+        <HealthConditionsForm
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChange={handleHealthConditionFormChange}
+          handleSearchChange={handleSearchChange}
+          healthConditionForm={healthConditionForm}
+        />
+      );
     case 3:
       return (
         <MedicalQuestionnaire
@@ -97,7 +115,15 @@ export const PatientEnrollmentForm = () => {
         />
       );
     case 4:
-      return <PatientSummary prevStep={prevStep} nextStep={nextStep} formData={formData} medicalFormData={medicalFormData} />;
+      return (
+        <PatientSummary
+          prevStep={prevStep}
+          nextStep={nextStep}
+          formData={formData}
+          medicalFormData={medicalFormData}
+          healthConditionForm={healthConditionForm}
+        />
+      );
     case 5:
       return (
         <ConfirmAndSubmitForm prevStep={prevStep} nextStep={nextStep} handleChange={handleConfirmAndSubmitChange} disableNextStep={disableNextStep} />

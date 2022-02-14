@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Grid, Button, Container, Header } from "semantic-ui-react";
 
-export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData }) => {
+export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData, healthConditionForm }) => {
   return (
     <Container textAlign="left">
       <Grid>
@@ -40,6 +40,7 @@ export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData }
                   <Container textAlign="left">
                     <Container>{questionGroup.question}</Container>
                     <Container>{questionGroup.value}</Container>
+                    {questionGroup.value === "yes" && <Container>{questionGroup.frequency}</Container>}
                   </Container>
                 );
               } else {
@@ -52,14 +53,29 @@ export const PatientSummary = ({ nextStep, prevStep, formData, medicalFormData }
               }
             })}
           </Grid.Column>
+          <Grid.Column width={8}>
+            <Header as="h3" block textAlign="center">
+              Health Conditions
+            </Header>
+            {Object.keys(healthConditionForm).map((conditionType, index, value) => {
+              return (
+                <Container padded>
+                  <Header sub>{conditionType}</Header>
+                  <span>{healthConditionForm[conditionType].join(", ")}</span>
+                </Container>
+              );
+            })}
+          </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Button primary onClick={prevStep} type="submit">
-        Previous
-      </Button>
-      <Button onClick={nextStep} type="submit">
-        Next
-      </Button>
+      <Container textAlign="center">
+        <Button onClick={prevStep} type="submit">
+          Previous
+        </Button>
+        <Button onClick={nextStep} type="submit" positive>
+          Next
+        </Button>
+      </Container>
     </Container>
   );
 };

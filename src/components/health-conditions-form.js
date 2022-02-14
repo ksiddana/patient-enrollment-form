@@ -1,151 +1,44 @@
-import React from "react";
-import { Form, Container } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Form, Container, Header, Grid, Button, Label, Divider } from "semantic-ui-react";
 import { Dropdown } from "semantic-ui-react";
 import _ from "lodash";
+import { conditionsGroupedByType } from "../fixtures/health-conditions";
 
-const healthConditions = [
-  {
-    type: "cardiovascular",
-    condition: "High blood pressure",
-  },
-  {
-    type: "cardiovascular",
-    condition: "Cardiac Arrest",
-  },
-  {
-    type: "cardiovascular",
-    condition: "Arrhythmia",
-  },
-  {
-    type: "cardiovascular",
-    condition: "Coronary heart disease",
-  },
-  {
-    type: "cardiovascular",
-    condition: "Coronary heart disease",
-  },
-  {
-    type: "gastrointestinal",
-    condition: "IBS",
-  },
-  {
-    type: "gastrointestinal",
-    condition: "Crohn's Disease",
-  },
-  {
-    type: "gastrointestinal",
-    condition: "Gallstones",
-  },
-  {
-    type: "psychological",
-    condition: "Depression",
-  },
-  {
-    type: "psychological",
-    condition: "Anxiety",
-  },
-  {
-    type: "psychological",
-    condition: "Stress",
-  },
-  {
-    type: "psychological",
-    condition: "Insomnia",
-  },
-  {
-    type: "other",
-    condition: "Cancer",
-  },
-  {
-    type: "other",
-    condition: "Diabetes",
-  },
-];
-
-const conditionsGroupedByType = [
-  {
-    type: "Cardiovascular",
-    conditions: [
-      { type: "cardiovascular", condition: "High blood pressure", text: "a", value: "a", key: "a" },
-      { type: "cardiovascular", condition: "Cardiac Arrest", text: "b", value: "b", key: "b" },
-      { type: "cardiovascular", condition: "Arrhythmia", text: "c", value: "c", key: "c" },
-      { type: "cardiovascular", condition: "Coronary heart disease", text: "d", value: "d", key: "d" },
-      { type: "cardiovascular", condition: "Coronary heart disease", text: "e", value: "e", key: "e" },
-    ],
-  },
-  {
-    type: "Gastrointestinal",
-    conditions: [
-      { type: "gastrointestinal", condition: "IBS", text: "a", value: "a", key: "a" },
-      { type: "gastrointestinal", condition: "Crohn's Disease", text: "b", value: "b", key: "b" },
-      { type: "gastrointestinal", condition: "Gallstones", text: "c", value: "c", key: "c" },
-    ],
-  },
-  {
-    type: "Psychological",
-    conditions: [
-      { type: "psychological", condition: "Depression" },
-      { type: "psychological", condition: "Anxiety" },
-      { type: "psychological", condition: "Stress" },
-      { type: "psychological", condition: "Insomnia" },
-    ],
-  },
-  {
-    type: "Other",
-    conditions: [
-      { type: "other", condition: "Cancer" },
-      { type: "other", condition: "Diabetes" },
-    ],
-  },
-];
-
-// [{type: "cardiovascular", options: [{value: "High blood pressure"}]}]
-// const formattedHealthConditions = conditionsGroupedByType.map((type, index) => {
-//   return type.conditions.map((condition) => {
-//     return [{ ...condition, key: condition.condition, value: condition.condition, text: condition.condition }];
-//   });
-// });
-// const temp = [];
-// const groupConditionsByType = healthConditions.map((condition) => {
-//   let newType = { type: condition.type, conditions: [condition.condition] };
-
-//   if (temp.length > 1) {
-//     temp.forEach((type) => {
-//       if (type === condition.type) {
-//         type.conditions.push(condition.condition);
-//       } else {
-//       }
-//     });
-//   } else {
-//     temp.push(newType);
-//   }
-
-//   return temp;
-// });
-
-// const tempType = _.chain(healthConditions)
-//   .groupBy("type")
-//   .map((value, key) => ({ key: _.upperFirst(key), value, text: value }))
-//   .value();
-
-const HealthConditionsForm = ({ nextStep, prevStep, handleChange }) => {
-  // const groupConditionsByType = healthConditions.reduce((condition) => {}, )
-  // console.log("formattedHealthConditions", formattedHealthConditions);
+const HealthConditionsForm = ({ nextStep, prevStep, handleChange, handleSearchChange, healthConditionForm }) => {
   return (
     <Container>
-      <Form>
-        {conditionsGroupedByType.map((type) => {
-          return <Dropdown fluid search selection options={type.conditions} />;
-        })}
-        <Form.Group>
-          <Form.Button onClick={prevStep} type="submit">
-            Previous
-          </Form.Button>
-          <Form.Button onClick={nextStep} type="submit">
-            Next
-          </Form.Button>
-        </Form.Group>
-      </Form>
+      <Header as="h3" block textAlign="center">
+        Health Conditions
+      </Header>
+      <Container>Please select all the health conditions that apply to you</Container>
+      <Divider />
+      <Grid>
+        <Grid.Row columns={2}>
+          {conditionsGroupedByType.map((type) => {
+            return (
+              <Grid.Column>
+                <Container textAlign="left">{type.type}</Container>
+                <Dropdown
+                  multiple
+                  fluid
+                  search
+                  selection
+                  options={type.conditions}
+                  onChange={handleChange}
+                  onSearchChange={handleSearchChange}
+                  value={healthConditionForm[type]}
+                />
+              </Grid.Column>
+            );
+          })}
+        </Grid.Row>
+      </Grid>
+      <Button onClick={prevStep} type="submit">
+        Previous
+      </Button>
+      <Button onClick={nextStep} type="submit" positive>
+        Next
+      </Button>
     </Container>
   );
 };

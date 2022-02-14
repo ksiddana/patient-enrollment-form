@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Form, Container, Grid } from "semantic-ui-react";
+import React from "react";
+import { Form, Container, Grid, Header, Label, Button } from "semantic-ui-react";
 
 const MedicalQuestionnaire = ({ nextStep, prevStep, handleChange, formData, handleFrequencyChange }) => {
   return (
     <Container textAlign="left">
+      <Header as="h3" block textAlign="center">
+        Medical Questionnaire
+      </Header>
       <Form>
         {formData.map((questionGroup) => {
           if (questionGroup.type === "radio") {
@@ -27,12 +30,17 @@ const MedicalQuestionnaire = ({ nextStep, prevStep, handleChange, formData, hand
                   </Grid.Column>
                   <Grid.Column width={8}>
                     {questionGroup.value === "yes" && (
-                      <Form.Input
-                        label="How much and how often?"
-                        type="text"
-                        value={questionGroup.frequency}
-                        onChange={(_, e) => handleFrequencyChange(questionGroup.key, e.value)}
-                      />
+                      <Form.Field inline>
+                        <Form.Input
+                          label="How much and how often? (times/week)"
+                          type="text"
+                          value={questionGroup.frequency}
+                          onChange={(_, e) => handleFrequencyChange(questionGroup.key, e.value)}
+                        />
+                        <Label basic color="red" pointing>
+                          Please enter a value
+                        </Label>
+                      </Form.Field>
                     )}
                   </Grid.Column>
                 </Grid.Row>
@@ -51,15 +59,15 @@ const MedicalQuestionnaire = ({ nextStep, prevStep, handleChange, formData, hand
             );
           }
         })}
-        <Form.Group>
-          <Form.Button onClick={prevStep} type="submit">
-            Previous
-          </Form.Button>
-          <Form.Button onClick={nextStep} type="submit">
-            Next
-          </Form.Button>
-        </Form.Group>
       </Form>
+      <Container textAlign="center">
+        <Button onClick={prevStep} type="submit">
+          Previous
+        </Button>
+        <Button onClick={nextStep} type="submit" positive>
+          Next
+        </Button>
+      </Container>
     </Container>
   );
 };
